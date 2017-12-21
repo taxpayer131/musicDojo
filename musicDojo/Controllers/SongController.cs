@@ -38,8 +38,10 @@ namespace musicDojo.Controllers
         }
 
         [HttpPost]
-       public async Task<IActionResult> AddSong([Bind("ID, Artist, Title, Adds")]Song song)
+       public async Task<IActionResult> AddSong(Song song)
         {
+            System.Console.WriteLine(song);
+            System.Console.WriteLine("??????*********&&&&&&%%%%%%%$$$?");
             song.Adds = 0;
             if (ModelState.IsValid)
             {

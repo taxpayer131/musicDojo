@@ -6,10 +6,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Hello @User!  All the songs in our hub.</h2>
+<h2>Hello!  These are all the songs in our hub.</h2>
 
 <div>
-    <h4>Song</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -37,7 +36,6 @@
     <a asp-action="Index">Back to List</a>
 </div>*@
 
-//Form to add a song to the SongsDB.mdf
 <form method="POST" asp-action="AddSong" asp-controller="Song">
     <div class="form-group">
         <label for="Artist">Artist</label>
