@@ -30,14 +30,24 @@ namespace musicDojo.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            return View(await _Context.Song.ToListAsync());
+            HybridModel SongModel = new HybridModel();
+            SongModel.songModel = new Song();
+            SongModel.songs = await _Context.Song.ToListAsync();
+            return View(SongModel);
 
         }
 
-        //[HttpPost]
-       //// public async Task<IActionResult> AddSong([Bind("ID, Artist, Title")]Song song)
-       // {
-       //     song.Adds = 0;
-       // }
-    }
+        [HttpPost]
+       public async Task<IActionResult> AddSong([Bind("ID, Artist, Title, Adds")]Song song)
+        {
+            song.Adds = 0;
+            if (ModelState.IsValid)
+            {
+                _Context.Add(song);
+                await _Context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+}
 }
