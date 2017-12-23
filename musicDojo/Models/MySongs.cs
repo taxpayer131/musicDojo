@@ -9,5 +9,6 @@ namespace musicDojo.Models
     {
         public int ID { get; set; }
         public int SongID { get; set; }
+        public string UserEmail { get; set; }
     }
 }

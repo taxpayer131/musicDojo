@@ -11,9 +11,10 @@ using System;
 namespace musicDojo.Migrations.MySongsDB
 {
     [DbContext(typeof(MySongsDBContext))]
-    partial class MySongsDBContextModelSnapshot : ModelSnapshot
+    [Migration("20171223183839_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,12 +23,10 @@ namespace musicDojo.Migrations.MySongsDB
 
             modelBuilder.Entity("musicDojo.Models.MySongs", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("SongID");
-
-                    b.Property<string>("UserEmail");
 
                     b.HasKey("ID");
 

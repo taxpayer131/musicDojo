@@ -36,20 +36,36 @@ namespace musicDojo.Controllers
             return View(SongModel);
 
         }
+        
 
         [HttpPost]
-       public async Task<IActionResult> AddSong(Song song)
+        public async Task<IActionResult> AddSong(HybridModel song)
         {
-            System.Console.WriteLine(song);
-            System.Console.WriteLine("??????*********&&&&&&%%%%%%%$$$?");
-            song.Adds = 0;
+
+            song.songModel.Adds = 0;
             if (ModelState.IsValid)
             {
-                _Context.Add(song);
+                _Context.Add(song.songModel);
                 await _Context.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));
 
         }
-}
+        [HttpPost]
+        public async Task<IActionResult> ToPlaylist(HybridModel song)
+        {
+            var CurrentUser = await _user.GetUserAsync(User);
+            MySongs playlistSong = new MySongs();
+            playlistSong.SongID = song.songModel.ID;
+            playlistSong.UserEmail = CurrentUser.Email;
+
+            if (ModelState.IsValid)
+            {
+                _MySongsContext.Add(song.songModel);
+                await _MySongsContext.SaveChangesAsync();
+            }
+                return RedirectToAction(nameof(Index));
+
+        }
+    }
 }
