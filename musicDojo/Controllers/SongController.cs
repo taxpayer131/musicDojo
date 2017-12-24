@@ -36,7 +36,7 @@ namespace musicDojo.Controllers
             return View(SongModel);
 
         }
-        
+
 
         [HttpPost]
         public async Task<IActionResult> AddSong(HybridModel song)
@@ -64,7 +64,20 @@ namespace musicDojo.Controllers
                 _MySongsContext.Add(song.songModel);
                 await _MySongsContext.SaveChangesAsync();
             }
-                return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
+
+        }
+        //renders a newly-added song to the user's playlist
+        [HttpPost]
+        public async Task<IActionResult> AddToPlaylist(HybridModel song)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _Context.Add(song.songModel);
+                await _Context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(MySongs));
 
         }
     }
